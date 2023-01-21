@@ -461,11 +461,11 @@ app.get("/approve/:ApplicationId", function(req, res) {
       });
 
       var mailOptions = {
-        from: '"Votar Portal" <process.env.MAIL_ID1>',
+        from: '2021pietcsaditya010@poornima.org',
         to: mail_id,
         subject: 'Application Approved',
         text: '' + '' + requestedApplicationId + ' .',
-        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Approved" + '</h3>' + " and you can download it from website using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Download it from given link</h3>" + "<br>https://voter-portal.onrender.com/status2/" + requestedApplicationId + ""
+        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Approved" + '</h3>' + " and you can download it from website using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Download it from given link</h3>" + "<br>http://localhost:3012/status2/" + requestedApplicationId + ""
       };
 
       transporter.sendMail(mailOptions, function(error, info) {
@@ -494,29 +494,48 @@ app.get("/approve/:ApplicationId", function(req, res) {
         doc
         .text('Last Name : ')
         .text(lname);
-
+        //const pdfBuffer = Buffer.from(doc.pipe().toString('binary'), 'binary');
       // doc.pipe(fs.createWriteStream(__dirname + '/VoterId.pdf'));
       //doc.pipe(fs.createWriteStream('VoterId.pdf'));
       //doc.end();
-      const chunks = [];
-   doc.on('data', chunk => chunks.push(chunk));
-   doc.on('end', () => {
-       const pdfBuffer = Buffer.concat(chunks);
-      //fs.readFile('VoterId.pdf', (err, pdfBuffer) => {
-        //if (err) throw err;
-        // Create a new pdf instance
-        const newPdf = new Pdf({
-          key : requestedApplicationId,
-          name: 'VoterId.pdf',
-          data: pdfBuffer
+      // fs.readFile('VoterId.pdf', (err, pdfBuffer) => {
+      //   if (err) throw err;
+      //   // Create a new pdf instance
+      //
+      //   newPdf.save((err, pdf) => {
+      //     if (err) throw err;
+      //     //console.log('PDF saved to MongoDB');
+      //   });
+      // });
+      //const pdf1 = doc.end();
+      //const pdfBuffer = Buffer.from(doc.output());
+      const newPdf = new Pdf({
+        key : requestedApplicationId,
+        name: 'VoterId.pdf',
+        //data: pdfBuffer
+      });
+      let chunks = [];
+        doc.on('data', (chunk) => {
+            chunks.push(chunk);
         });
-        newPdf.save((err, pdf) => {
-          if (err) throw err;
-          //console.log('PDF saved to MongoDB');
+        doc.on('end', () => {
+            const pdfBuffer = Buffer.concat(chunks);
+            newPdf.data = pdfBuffer;
+            newPdf.save((err, newPdf) => {
+                if (err) throw err;
+                
+            });
+
         });
-      //});
+        doc.end();
+      //const pdfBuffer = Buffer.from(doc.pipe().toString('binary'), 'binary');
+    //newPdf.data = pdfBuffer;
+    //   newPdf.save((err, newPdf) => {
+    //   if (err) throw err;
+    //   console.log(`PDF saved to MongoDB: ${newPdf}`);
+    // });
       res.redirect("/verify");
-    });
+    }
   });
 });
 
