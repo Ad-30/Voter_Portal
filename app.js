@@ -516,7 +516,7 @@ app.get("/approve/:ApplicationId", function(req, res) {
         });
       //});
       res.redirect("/verify");
-    }
+    });
   });
 });
 
