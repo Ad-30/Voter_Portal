@@ -465,7 +465,7 @@ app.get("/approve/:ApplicationId", function(req, res) {
         to: mail_id,
         subject: 'Application Approved',
         text: '' + '' + requestedApplicationId + ' .',
-        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Approved" + '</h3>' + " and you can download it from website using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Download it from given link</h3>" + "<br>http://localhost:3012/status2/" + requestedApplicationId + ""
+        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Approved" + '</h3>' + " and you can download it from website using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Download it from given link</h3>" + "<br>https://voter-portal.onrender.com/status2/" + requestedApplicationId + ""
       };
 
       transporter.sendMail(mailOptions, function(error, info) {
@@ -554,7 +554,7 @@ app.get("/disapprove/:ApplicationId", function(req, res) {
         to: mail_id,
         subject: 'Application Rejected',
         text: '' + '' + requestedApplicationId + ' .',
-        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Rejected" + '</h3>' + " upload supporting document on portal using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Upload from given link</h3>" + "<br>http://localhost:3012/status2/" + requestedApplicationId + ""
+        html: '<h3>Dear ' + fname + ' ' + lname + ',</h3><br>Your application is ' + '<h3 style="color:red">' + "Rejected" + '</h3>' + " upload supporting document on portal using given application id" + '<br><h3 style="color:red">' + requestedApplicationId + "<h3>" + "<h3>Upload from given link</h3>" + "<br>https://voter-portal.onrender.com/status2/" + requestedApplicationId + ""
       };
 
       transporter.sendMail(mailOptions, function(error, info) {
