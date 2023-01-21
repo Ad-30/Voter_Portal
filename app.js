@@ -496,10 +496,14 @@ app.get("/approve/:ApplicationId", function(req, res) {
         .text(lname);
 
       // doc.pipe(fs.createWriteStream(__dirname + '/VoterId.pdf'));
-      doc.pipe(fs.createWriteStream('VoterId.pdf'));
-      doc.end();
-      fs.readFile('VoterId.pdf', (err, pdfBuffer) => {
-        if (err) throw err;
+      //doc.pipe(fs.createWriteStream('VoterId.pdf'));
+      //doc.end();
+      const chunks = [];
+   doc.on('data', chunk => chunks.push(chunk));
+   doc.on('end', () => {
+       const pdfBuffer = Buffer.concat(chunks);
+      //fs.readFile('VoterId.pdf', (err, pdfBuffer) => {
+        //if (err) throw err;
         // Create a new pdf instance
         const newPdf = new Pdf({
           key : requestedApplicationId,
@@ -510,7 +514,7 @@ app.get("/approve/:ApplicationId", function(req, res) {
           if (err) throw err;
           //console.log('PDF saved to MongoDB');
         });
-      });
+      //});
       res.redirect("/verify");
     }
   });
