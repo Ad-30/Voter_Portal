@@ -84,8 +84,8 @@ let application_number = "";
 let reason = "";
 let dob = "";
 let address = "";
- mongoose.connect(process.env.MONGO);
-//mongoose.connect("mongodb://localhost:27017/voterDB");
+ //mongoose.connect(process.env.MONGO);
+mongoose.connect("mongodb://localhost:27017/voterDB");
 
 const userSchema = new mongoose.Schema({
   email: String,
@@ -155,9 +155,7 @@ const pdfSchema = new mongoose.Schema({
   });
   const Pdf = mongoose.model('Pdf', pdfSchema);
 const Data = mongoose.model('Data', dataSchema);
-// app.use(function(req, res) {
-//   res.status(404).send('its a 404 try to enter right URL bro!');
-// })
+
 
 
 app.get("/", function(req, res) {
@@ -242,10 +240,13 @@ function imageFilter(req, file, cb) {
 }
 
 app.get("/about", function(req, res) {
+  if (typeof data === 'undefined') {
+    res.render('error', { message: 'Data is not defined' });
+  }else{
   res.render("about", {
     //id : id,
     data: data
-  });
+  });}
 });
 
 app.post("/about", function(req, res) {
@@ -679,7 +680,9 @@ app.get('/edit', function(req, res) {
 
 
 
-
+app.use(function(req, res, next) {
+  res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
+});
 
 app.listen(3012, function() {
   console.log("Server started on port 3012");
