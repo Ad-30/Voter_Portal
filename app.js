@@ -69,7 +69,7 @@ app.use(session({
   secret: 'Our little secret.',
   resave: false,
   saveUninitialized: false,
-  // cookie: { secure: true }
+
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -84,8 +84,8 @@ let application_number = "";
 let reason = "";
 let dob = "";
 let address = "";
- //mongoose.connect(process.env.MONGO);
-mongoose.connect("mongodb://localhost:27017/voterDB");
+mongoose.connect(process.env.MONGO);
+//mongoose.connect("mongodb://localhost:27017/voterDB");
 
 const userSchema = new mongoose.Schema({
   email: String,
