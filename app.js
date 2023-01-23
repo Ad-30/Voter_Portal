@@ -127,25 +127,7 @@ const dataSchema = {
     name: String,
     data: Buffer
   }
-  // {
-  //   filename: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   contentType: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   length: {
-  //     type: Number,
-  //     required: true
-  //   },
-  //   data1: {
-  //     type: Buffer,
-  //     required: true
-  //   }
-  //
-  // }
+
 
 }
 const pdfSchema = new mongoose.Schema({
@@ -220,21 +202,16 @@ app.post("/apply", upload.single('upload_document'), function(req, res) {
       name: "",
       data: ""
     }
-    //{
-    //   filename: req.file.originalname,
-    //   contentType: req.file.mimetype,
-    //   length: req.file.size,
-    //   data1: buffer
-    //
-    // }
+
   };
   res.redirect("/about");
 });
-// new Data()
+
 function imageFilter(req, file, cb) {
-  // accept image only
+
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
     return cb(new Error('Only image files are allowed!'), false);
+    res.send("Only jpeg files are allowed.")
   }
   cb(null, true);
 }
@@ -244,7 +221,6 @@ app.get("/about", function(req, res) {
     res.render('error', { message: 'Data is not defined' });
   }else{
   res.render("about", {
-    //id : id,
     data: data
   });}
 });
@@ -285,15 +261,14 @@ app.post("/about", function(req, res) {
       fname = data.firstName;
       lname = data.lastName;
       mail_id = data.email;
-      var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.MAIL_ID1,
-          pass: process.env.MAIL_PASSWORD
-          // user: "${process.env.MAIL_ID1}!",
-          // pass: "${process.env.MAIL_PASSWORD}!"
-        }
-      });
+      // var transporter = nodemailer.createTransport({
+      //   service: 'gmail',
+      //   auth: {
+      //     user: process.env.MAIL_ID1,
+      //     pass: process.env.MAIL_PASSWORD
+      //
+      //   }
+      // });
 
       var mailOptions = {
         from: '"Votar Portal" <process.env.MAIL_ID1>',
@@ -495,21 +470,7 @@ app.get("/approve/:ApplicationId", function(req, res) {
         doc
         .text('Last Name : ')
         .text(lname);
-        //const pdfBuffer = Buffer.from(doc.pipe().toString('binary'), 'binary');
-      // doc.pipe(fs.createWriteStream(__dirname + '/VoterId.pdf'));
-      //doc.pipe(fs.createWriteStream('VoterId.pdf'));
-      //doc.end();
-      // fs.readFile('VoterId.pdf', (err, pdfBuffer) => {
-      //   if (err) throw err;
-      //   // Create a new pdf instance
-      //
-      //   newPdf.save((err, pdf) => {
-      //     if (err) throw err;
-      //     //console.log('PDF saved to MongoDB');
-      //   });
-      // });
-      //const pdf1 = doc.end();
-      //const pdfBuffer = Buffer.from(doc.output());
+
       const newPdf = new Pdf({
         key : requestedApplicationId,
         name: 'VoterId.pdf',
@@ -529,12 +490,7 @@ app.get("/approve/:ApplicationId", function(req, res) {
 
         });
         doc.end();
-      //const pdfBuffer = Buffer.from(doc.pipe().toString('binary'), 'binary');
-    //newPdf.data = pdfBuffer;
-    //   newPdf.save((err, newPdf) => {
-    //   if (err) throw err;
-    //   console.log(`PDF saved to MongoDB: ${newPdf}`);
-    // });
+
       res.redirect("/verify");
     }
   });
@@ -565,13 +521,13 @@ app.get("/disapprove/:ApplicationId", function(req, res) {
 
       });
 
-      var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.MAIL_ID1,
-          pass: process.env.MAIL_PASSWORD
-        }
-      });
+      // var transporter = nodemailer.createTransport({
+      //   service: 'gmail',
+      //   auth: {
+      //     user: process.env.MAIL_ID1,
+      //     pass: process.env.MAIL_PASSWORD
+      //   }
+      // });
 
       var mailOptions = {
         from: '"Votar Portal" <process.env.MAIL_ID1>',
