@@ -1,89 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
 
-<head>
-  <meta charset="utf-8">
-  <title>Apply</title>
-
-
-  <link rel="stylesheet" href="/css/styles.css" />
-  <link rel="stylesheet" href="/css/apply.css">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
-  <script src="https://kit.fontawesome.com/850c737ebd.js" crossorigin="anonymous"></script>
-
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
- <style media="screen">
- .main-div{
-   border-style:groove;
-   border-radius:10px;
-   margin-bottom:10px;
-   margin-top:10px;
-   margin-right:50px;
-   padding-left:40px;
-   padding-top:40px;
-
- }
- .main-div:hover {
-   box-shadow: 4px 4px 20px #dddddd;
- }
- </style>
-</head>
-
-<body>
-
-  <section id="title">
-    <div class="container-fluid">
-
-
-      <nav class="navbar navbar-expand-lg navbar-dark ">
-
-        <a class="navbar-brand title" href="index.html" style="color:black;">Voter Portal</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav ms-auto">
-
-
-
-            <li class="nav-item">
-
-              <a class="nav-link" href="news.html">News</a>
-
-            </li>
-
-            <li class="nav-item">
-
-              <a class="nav-link" href="#jump">Contact us</a>
-
-
-
-            </li>
-
-          </ul>
-
-        </div>
-
-      </nav>
-    </div>
-  </section> -->
   <!DOCTYPE html>
   <html lang="en">
 
@@ -138,12 +53,7 @@
     <!-- Template Main CSS File -->
     <link href="/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Voter - v4.9.1
-    * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+
   </head>
 
   <body>
@@ -167,11 +77,7 @@
             <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="status">Check Status of application</a></li>
-                <!-- <li><a href="#">Aadhar Card</a></li>
-                <li><a href="#">Pan Card</a></li>
-                <li><a href="#">Passport Card</a></li>
-                <li><a href="#">Birth Certificate</a></li>
-                <li><a href='login.html'>Voter ID</a></li> -->
+
               </ul>
             </li>
             <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
@@ -184,46 +90,46 @@
     </header>
       <h2>Enter your details</h2>
     <div class="main-div" style="margin-top:100px;">
-      <form class="apply-form" action="/apply" method="post">
+      <form class="apply-form" action="/edit" method="post" enctype="multipart/form-data">
         <div class="row"id="div-width-main">
           <div class="col-lg-6">
             <label for="">First name &nbsp &nbsp &nbsp :</label>
-            <input class="fname border1 "type="text" name="fname" value="<%=data.firstName %>" placeholder="First name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+            <input class="fname border1 "type="text" name="fname" value="<%=data.firstName %>" placeholder="First name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
           </div>
           <div class="col-lg-6 "id="div-width">
             <label for="">Last name &nbsp&nbsp&nbsp&nbsp:</label>
-            <input class="border1 " type="text" name="lname" value="<%=data.lastName %>" placeholder="Last name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+            <input class="border1 " type="text" name="lname" value="<%=data.lastName %>" placeholder="Last name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"required>
           </div>
           <div class="col-lg-6">
             <label for="">Father's name :</label>
-            <input class="border1 "type="text" name="fathersName" value="<%=data.fathersName %>" placeholder="Father's name" >
+            <input class="border1 "type="text" name="fathersName" value="<%=data.fathersName %>" placeholder="Father's name" required>
           </div>
           <div class="col-lg-6 "id="div-width">
             <label for="">Date of birth :</label>
-            <input class="border1 "type="date" name="dob" value="<%=data.dob %>" placeholder="D.O.B">
+            <input class="border1 "type="date" name="dob" value="<%=data.dob %>" placeholder="D.O.B" required>
           </div>
           <div class="col-lg-6">
             <label for="">E-mail &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</label>
 
-            <input class="email  border1"type="email" name="email" value="<%=data.email %>" placeholder="Enter e-mail">
+            <input class="email  border1"type="email" name="email" value="<%=data.email %>" placeholder="Enter e-mail" required>
           </div>
           <div class="col-lg-6 "id="div-width">
             <label for="">Mobile no. &nbsp&nbsp&nbsp&nbsp:</label>
-            <input class=" border1"type="tel" name="mob" value="<%=data.mob %>" maxlength="13">
+            <input class=" border1"type="tel" name="mob" value="<%=data.mob %>" maxlength="13" required>
           </div>
           <div class="col-lg-6">
             <label for="">Address &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</label>
-            <input class="border1 "type="text" name="address_house" value="<%=data.address.house_no %>" placeholder="House no.">
+            <input class="border1 "type="text" name="address_house" value="<%=data.address.house_no %>" placeholder="House no." required>
           </div>
           <div class=""id="div-width">
-          <input id="address-length"class=" border1 "type="text" name="address_locality" value="<%=data.address.locality %>" placeholder="Locality">
-          <input id="address-length"class=" border1 "type="text" name="address_road" value="<%=data.address.road_name %>" placeholder="Road name">
-          <input id="address-length"class=" border1 "type="text" name="address_pincode" value="<%=data.address.pincode %>" placeholder="Pincode" maxlength="6" minlength="6">
+          <input id="address-length"class=" border1 "type="text" name="address_locality" value="<%=data.address.locality %>" placeholder="Locality" >
+          <input id="address-length"class=" border1 "type="text" name="address_road" value="<%=data.address.road_name %>" placeholder="Road name" >
+          <input id="address-length"class=" border1 "type="text" name="address_pincode" value="<%=data.address.pincode %>" placeholder="Pincode" maxlength="6" minlength="6" required>
         </div>
 
           <div class="form-group col-lg-6">
             <label for="inputState">State</label>
-            <select class="form-control" id="inputState" name="state" value="<%=data.address.state %>">
+            <select class="form-control" id="inputState" name="state" value="<%=data.address.state %>" required>
               <option value="SelectState">Select State</option>
               <option value="Andra Pradesh">Andra Pradesh</option>
               <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -266,13 +172,13 @@
           </div>
           <div class="form-group col-lg-6">
             <label for="inputDistrict">District</label>
-            <select class="form-control" id="inputDistrict" name="district" value="<%=data.address.district %>">
+            <select class="form-control" id="inputDistrict" name="district" value="<%=data.address.district %>" required>
               <option value="">-- select one -- </option>
             </select>
           </div>
           <div class="col-lg-6">
             <label for="">Identity type :</label>
-            <select class="" name="id_type" value="<%=data.identity_type %>">
+            <select class="" name="id_type" value="<%=data.identity_type %>" required>
               <option value="Aadhar-card">Aadhar card</option>
               <option value="Driving-license">Driving license</option>
               <option value="Pan-card">Pan card</option>
@@ -282,11 +188,14 @@
 
           <div class="col-lg-6">
             <label for="">Identity number :</label>
-            <input class="border1 " type="text" name="id_number" value="<%=data.identity_no %>" placeholder="Enter" maxlength="16" minlength="10">
+            <input class="border1 " required type="text" name="id_number" value="<%=data.identity_no %>" placeholder="Enter" maxlength="16" minlength="10">
           </div>
           <div class="col-lg-6">
+
             <label for="">Upload selected document :</label>
-            <input type="file" name="upload_document" value="" placeholder="Upload">
+            <input type="file"   name="upload_document1" placeholder="Upload" onchange="previewImage()" >
+            <!-- <img id="preview" src="edit-pdf"style="max-height:300px;max-width:300px;"/> -->
+            <p>If already uploaded then no need to upload it again but if you want to change it then you can upload again.</p>
           </div>
           <div class="division-submit"><a href=""><input class="btn btn-primary btn1"type="submit" name="" value="Submit"></a>
         </div></div>
@@ -300,13 +209,7 @@
             <div class="copyright">
               &copy; Copyright <strong>Voter Portal</strong>. All Rights Reserved
             </div>
-            <div class="credits">
-              <!-- All the links in the footer should remain intact. -->
-              <!-- You can delete the links only if you purchased the pro version. -->
-              <!-- Licensing information: https://bootstrapmade.com/license/ -->
-              <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-              <!-- Designed by <a href="https://bootstrapmade.com/">AmanJain</a> -->
-            </div>
+
           </div>
           <div class="col-lg-6">
             <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
@@ -321,6 +224,10 @@
     </footer>
 
       <script>
+      window.onload = function() {
+  myFunction();
+}
+window.addEventListener("load", myFunction);
       var AndraPradesh = ["Anantapur","Chittoor","East Godavari","Guntur","Kadapa","Krishna","Kurnool","Prakasam","Nellore","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari"];
 var ArunachalPradesh = ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kra Daadi","Kurung Kumey","Lohit","Longding","Lower Dibang Valley","Lower Subansiri","Namsai","Papum Pare","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang","Itanagar"];
 var Assam = ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup Metropolitan","Kamrup (Rural)","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Dima Hasao","Sivasagar","Sonitpur","South Salmara Mankachar","Tinsukia","Udalguri","West Karbi Anglong"];
@@ -484,6 +391,39 @@ $("#inputDistrict").html(htmlString);
 
 });
 
+function previewImage() {
+  var file = document.getElementById("fileInput").files[0];
+  var reader = new FileReader();
+
+  reader.onloadend = function() {
+    document.getElementById("preview").src = reader.result;
+
+  }
+
+  if (file) {
+
+    reader.readAsDataURL(file);
+  } else {
+
+    document.getElementById("preview").src = "";
+  }
+}
+
+
+// const select = document.getElementById("inputState");
+// const options = select.options;
+// for(vari=0;i<options.length;i++){
+//   if(options[i].value===<%=data.address.state %>){
+//     options[i].selected = true;
+//     console.log("hello");
+//   }
+// }
+function myFunction() {
+const defaultValue = <%=data.address.state%>;
+console.log("hello"+defaultValue);
+document.querySelector(`#inputState option[value=${defaultValue}]`).selected = true;
+}
+myFunction();
       </script>
 </body>
 

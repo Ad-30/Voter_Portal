@@ -9,6 +9,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const multer = require('multer');
+const FormData = require('form-data');
 require('dotenv').config();
 const PDFDocument = require('pdfkit');
 const storage = multer.memoryStorage();
@@ -16,6 +17,7 @@ const upload = multer({
   storage: storage,
   fileFilter: imageFilter
 });
+var URLSearchParams = require('url-search-params');
 const binary = require('mongodb').Binary;
 const fs = require('fs');
 
@@ -84,6 +86,7 @@ let application_number = "";
 let reason = "";
 let dob = "";
 let address = "";
+
 mongoose.connect(process.env.MONGO);
 //mongoose.connect("mongodb://localhost:27017/voterDB");
 
@@ -131,11 +134,13 @@ const dataSchema = {
 
 }
 const pdfSchema = new mongoose.Schema({
-    key : String,
-    name: String,
-    data: Buffer
-  });
-  const Pdf = mongoose.model('Pdf', pdfSchema);
+  key: String,
+  name: String,
+  data: Buffer
+});
+
+
+const Pdf = mongoose.model('Pdf', pdfSchema);
 const Data = mongoose.model('Data', dataSchema);
 
 
@@ -207,6 +212,45 @@ app.post("/apply", upload.single('upload_document'), function(req, res) {
   res.redirect("/about");
 });
 
+app.post("/edit", upload.single('upload_document1'), function(req, res) {
+  //const buffer = new Buffer(req.file.buffer, 'binary');
+  if (!req.file) {
+    image_data = data.pdf;
+  } else {
+    image_data = req.file.buffer;
+  }
+
+
+  data = {
+    firstName: req.body.fname,
+    lastName: req.body.lname,
+    fathersName: req.body.fathersName,
+    dob: req.body.dob,
+    email: req.body.email,
+    mob: req.body.mob,
+    address: {
+      house_no: req.body.address_house,
+      locality: req.body.address_locality,
+      road_name: req.body.address_road,
+      pincode: req.body.address_pincode,
+      district: req.body.district,
+      state: req.body.state,
+
+    },
+    identity_type: req.body.id_type,
+    identity_no: req.body.id_number,
+    status: "In process",
+    reason: "",
+    pdf: image_data,
+    voterId: {
+      name: "",
+      data: ""
+    }
+
+  };
+  res.redirect("/about");
+});
+
 function imageFilter(req, file, cb) {
 
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -218,11 +262,14 @@ function imageFilter(req, file, cb) {
 
 app.get("/about", function(req, res) {
   if (typeof data === 'undefined') {
-    res.render('error', { message: 'Data is not defined' });
-  }else{
-  res.render("about", {
-    data: data
-  });}
+    res.render('error', {
+      message: 'Data is not defined'
+    });
+  } else {
+    res.render("about", {
+      data: data
+    });
+  }
 });
 
 app.post("/about", function(req, res) {
@@ -261,14 +308,7 @@ app.post("/about", function(req, res) {
       fname = data.firstName;
       lname = data.lastName;
       mail_id = data.email;
-      // var transporter = nodemailer.createTransport({
-      //   service: 'gmail',
-      //   auth: {
-      //     user: process.env.MAIL_ID1,
-      //     pass: process.env.MAIL_PASSWORD
-      //
-      //   }
-      // });
+
 
       var mailOptions = {
         from: '"Votar Portal" <process.env.MAIL_ID1>',
@@ -315,7 +355,9 @@ app.get('/view-pdf', (req, res) => {
 });
 app.get('/view-pdf1', (req, res) => {
 
-  Pdf.findOne({ key: req.query.id}, (err, pdf) => {
+  Pdf.findOne({
+    key: req.query.id
+  }, (err, pdf) => {
     if (err) throw err;
     res.set("Content-Type", "application/pdf");
     res.set(
@@ -325,6 +367,59 @@ app.get('/view-pdf1', (req, res) => {
     res.send(pdf.data);
   });
 
+});
+
+app.get('/edit-pdf', (req, res) => {
+
+
+
+  res.contentType("image/jpeg");
+  res.send(data.pdf);
+
+});
+
+app.post("/home",upload.none(),  function(req, res) {
+  let mailOptions = {
+    from: 'req.body.name <${req.body.email}>',
+    to: 'voter.portal.check@gmail.com',
+    subject: req.body.subject,
+    text: req.body.message,
+    html: '<h3>' + req.body.name + '<br>'+req.body.email+'</h3><br><p>' + req.body.message + '</p>', // plain text body
+  };
+
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Error sending email' });
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.status(200).send( 'Email sent<br><a href="/">Last page</a>' );
+    }
+  });
+});
+
+app.post("/index-new", function(req, res) {
+  let mailOptions = {
+    from: 'req.body.name <${req.body.email}>',
+    to: 'voter.portal.check@gmail.com',
+    subject: req.body.subject,
+    text: req.body.message,
+    html: '<h3>' + req.body.name + '<br>'+req.body.email+'</h3><br><p>' + req.body.message + '</p>', // plain text body
+  };
+
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Error sending email' });
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.status(200).send( 'Email sent<br><a href="/">Last page</a>' );
+    }
+  });
 });
 
 app.get("/verify", function(req, res) {
@@ -422,17 +517,16 @@ app.get("/approve/:ApplicationId", function(req, res) {
     status: "Approved"
   }, function(err) {
     if (!err) {
-
-
       Data.findById(requestedApplicationId, function(err, data) {
-        if(err){
+        if (err) {
           console.log(err);
-        }else{
-        fname = data.firstName;
-        lname = data.lastName;
-        dob = data.dob;
-        mail_id = data.email;
-      }
+        } else {
+          fname = data.firstName;
+          lname = data.lastName;
+          dob = data.dob;
+          mail_id = data.email;
+
+        }
 
       });
 
@@ -454,42 +548,42 @@ app.get("/approve/:ApplicationId", function(req, res) {
       ////////////////PDF////////////////////////////
       const doc = new PDFDocument();
       Data.findById(requestedApplicationId, function(err, data) {
-        if(err){
+        if (err) {
           console.log(err);
-        }else{
-        fname = data.firstName;
-        lname = data.lastName;
-        dob = data.dob;
-      }
+        } else {
+          fname = data.firstName;
+          lname = data.lastName;
+          dob = data.dob;
+        }
       });
       doc
 
         .fontSize(25)
         .text('First Name : ')
         .text(fname);
-        doc
+      doc
         .text('Last Name : ')
         .text(lname);
 
       const newPdf = new Pdf({
-        key : requestedApplicationId,
+        key: requestedApplicationId,
         name: 'VoterId.pdf',
         //data: pdfBuffer
       });
       let chunks = [];
-        doc.on('data', (chunk) => {
-            chunks.push(chunk);
-        });
-        doc.on('end', () => {
-            const pdfBuffer = Buffer.concat(chunks);
-            newPdf.data = pdfBuffer;
-            newPdf.save((err, newPdf) => {
-                if (err) throw err;
-
-            });
+      doc.on('data', (chunk) => {
+        chunks.push(chunk);
+      });
+      doc.on('end', () => {
+        const pdfBuffer = Buffer.concat(chunks);
+        newPdf.data = pdfBuffer;
+        newPdf.save((err, newPdf) => {
+          if (err) throw err;
 
         });
-        doc.end();
+
+      });
+      doc.end();
 
       res.redirect("/verify");
     }
@@ -508,26 +602,16 @@ app.get("/disapprove/:ApplicationId", function(req, res) {
       Data.find({
         _id: requestedApplicationId
       }, function(err, datas) {
-        if(err){
+        if (err) {
           console.log(err);
-        }else{
-        fname = data.firstName;
-        lname = data.lastName;
-        dob = data.dob;
-        mail_id = data.email;
-      }
-
-
+        } else {
+          fname = data.firstName;
+          lname = data.lastName;
+          dob = data.dob;
+          mail_id = data.email;
+        }
 
       });
-
-      // var transporter = nodemailer.createTransport({
-      //   service: 'gmail',
-      //   auth: {
-      //     user: process.env.MAIL_ID1,
-      //     pass: process.env.MAIL_PASSWORD
-      //   }
-      // });
 
       var mailOptions = {
         from: '"Votar Portal" <process.env.MAIL_ID1>',
@@ -543,7 +627,7 @@ app.get("/disapprove/:ApplicationId", function(req, res) {
         } else {
           console.log('Email sent: ' + info.response);
         }
-      }) ;
+      });
 
       res.redirect("/verify");
     }
@@ -553,7 +637,7 @@ app.get("/disapprove/:ApplicationId", function(req, res) {
 
 app.get("/status", function(req, res) {
   res.render("status", {
-      id:""
+    id: ""
   });
 });
 app.post("/status", function(req, res) {

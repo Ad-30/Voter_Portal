@@ -1,5 +1,36 @@
 <!-- End Header -->
 <%- include('partials/header') %>
+<style media="screen">
+  #new-home{
+    display:block;
+  }
+  #loading-animation {
+  display: none;
+}
+
+#message-sent {
+  display: none;
+  color: green;
+  font-size: 1.5em;
+}
+.button1{
+  background: #3498db;
+    border: 0;
+    padding: 10px 24px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+    -webkit-appearance: button;
+    ursor: pointer;
+    outline: 1px solid #da8301!important;
+        text-transform: none;
+        margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+        box-sizing: border-box;
+}
+</style>
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
@@ -38,12 +69,12 @@
               <h3>Voter Portal</h3>
               <p>Any Indian citizen residing within the country, who has attained the age of 18,
 					can enroll himself/herself as Voter.</p>
-              <div class="social-links">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+          <div class="social-links">
+            <a href="https://twitter.com/adityavyas861/following" class="twitter"target="_blank" ><i class="bi bi-twitter" ></i></a>
+            <a href="https://github.com/Ad-30" class="facebook"target="_blank" ><i class="bi bi-github"></i></a>
+            <a href="https://www.instagram.com/_adityaa30_/" class="instagram" target="_blank" ><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/aditya-vyas-662650249/" class="linkedin" target="_blank" ><i class="bi bi-linkedin"></i></a>
+          </div>
             </div>
           </div>
 
@@ -68,7 +99,7 @@
           </div>
 
           <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="/home" method="post" role="form" class="php-email-form" id="contact-form" enctype="multipart/form-data">
               <div class="form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
               </div>
@@ -81,10 +112,10 @@
               <div class="form-group">
                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
               </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+              <img id="loading-animation" src="images/Spinner-1s-200px.gif" alt="Loading..." style="width:20px;height:20px;">
+
+              <div id="message-sent" style="display: none;">
+                <p> Message sent, Thanks for your feedback!</p>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
@@ -139,6 +170,16 @@
     /**
      * Easy selector helper function
      */
+
+
+     // Get the form element
+
+
+
+
+
+
+
     const select = (el, all = false) => {
       el = el.trim()
       if (all) {

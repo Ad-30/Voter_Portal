@@ -1,106 +1,159 @@
-<%- include('partials/header') %><!-- End Header -->
+<%- include('partials/header') %>
+<!-- End Header -->
 <style media="screen">
-  #new-home{
+  #new-home {
     display: none;
   }
-</style>
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up"> Voter Portal </h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">Any Indian citizen residing within the country, who has attained the age of 18,
-					can enroll himself/herself as Voter.</h2>
-          <div data-aos="fade-up" data-aos-delay="800">
-            <a href="apply" class="btn-get-started scrollto">Apply now</a>
-          </div>
+  #loading-animation {
+    display: none;
+  }
+
+  #message-sent {
+    display: none;
+    color: green;
+    font-size: 1.5em;
+  }
+</style>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+        <h1 data-aos="fade-up"> Voter Portal </h1>
+        <h2 data-aos="fade-up" data-aos-delay="400">Any Indian citizen residing within the country, who has attained the age of 18,
+          can enroll himself/herself as Voter.</h2>
+        <div data-aos="fade-up" data-aos-delay="800">
+          <a href="apply" class="btn-get-started scrollto">Apply now</a>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-          <img src="/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+        <img src="/img/hero-img.png" class="img-fluid animated" alt="">
       </div>
     </div>
+  </div>
 
-  </section><!-- End Hero -->
+</section><!-- End Hero -->
 
-  <main id="main">
+<main id="main">
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
 
-        <div class="section-title" data-aos="fade-up">
-          <h2>Contact Us</h2>
+      <div class="section-title" data-aos="fade-up">
+        <h2>Contact Us</h2>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-about">
+            <h3>Voter Portal</h3>
+            <p>Any Indian citizen residing within the country, who has attained the age of 18,
+              can enroll himself/herself as Voter.</p>
+            <div class="social-links">
+              <a href="https://twitter.com/adityavyas861/following" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+              <a href="https://github.com/Ad-30" class="facebook" target="_blank"><i class="bi bi-github"></i></a>
+              <a href="https://www.instagram.com/_adityaa30_/" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/aditya-vyas-662650249/" class="linkedin" target="_blank"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="contact-about">
-              <h3>Voter Portal</h3>
-              <p>Any Indian citizen residing within the country, who has attained the age of 18,
-					can enroll himself/herself as Voter.</p>
-              <div class="social-links">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+        <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+          <div class="info">
+            <div>
+              <i class="ri-map-pin-line"></i>
+              <p>Poornima college<br>Jaipur,302015</p>
             </div>
-          </div>
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="info">
-              <div>
-                <i class="ri-map-pin-line"></i>
-                <p>Poornima college<br>Jaipur,302015</p>
-              </div>
-
-              <div>
-                <i class="ri-mail-send-line"></i>
-                <p>2021pietcsaman017@Poornima.org</p>
-              </div>
-
-              <div>
-                <i class="ri-phone-line"></i>
-                <p>+91 9660128870</p>
-              </div>
-
+            <div>
+              <i class="ri-mail-send-line"></i>
+              <p>2021pietcsaman017@Poornima.org</p>
             </div>
-          </div>
 
-          <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
+            <div>
+              <i class="ri-phone-line"></i>
+              <p>+91 9660128870</p>
+            </div>
 
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+          <form action="/home" method="post" role="form" class="php-email-form" id="contact-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <img id="loading-animation" src="images/Spinner-1s-200px.gif" alt="Loading..." style="width:20px;height:20px;">
+
+            <div id="message-sent" style="display: none;">
+              <p> Message sent, Thanks for your feedback!</p>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
 
-  </main>
+    </div>
+  </section><!-- End Contact Section -->
 
-  <%- include('partials/footer') %><!-- End #main -->
+</main>
+<!-- <script type="text/javascript">
 
-  <!-- ======= Footer ======= -->
+  const form = document.getElementById('contact-form');
+
+  const loadingAnimation = document.getElementById('loading-animation');
+
+  const messageSent = document.getElementById('message-sent');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    loadingAnimation.style.display = 'block';
+
+    const formData = new FormData(form);
+    const data = new URLSearchParams();
+    for (const pair of new FormData(formElement)) {
+      data.append(pair[0], pair[1]);
+    }
+
+    fetch('/index-new', {
+      method: 'POST',
+
+      body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+
+      setTimeout(() => {
+        loadingAnimation.style.display = 'none';
+
+        messageSent.style.display = 'block';
+
+        form.reset();
+      }, 2000);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  });
+
+</script> -->
+
+<%- include('partials/footer') %>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->

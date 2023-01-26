@@ -86,7 +86,7 @@
               </ul>
             </li>
             <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <li><a class="getstarted scrollto" href="signup">Get Started</a></li>
+            <!-- <li><a class="getstarted scrollto" href="signup">Get Started</a></li> -->
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -198,15 +198,16 @@
           </div>
           <div class="col-lg-6">
             <label for="">Upload selected document :</label>
-            <input  required type="file" name="upload_document" value="" placeholder="Upload"><br>
+            <input  required type="file" name="upload_document" id="fileInput" placeholder="Upload" onchange="previewImage();" on><br>
             <p>*Only jpeg files are supported.</p>
+            <img id="preview" style="max-height:300px;max-width:300px;"/>
           </div>
           <div class="division-submit"><a href=""><input class="btn btn-primary btn1"type="submit" name="" value="Submit"></a>
         </div></div>
       </form>
     </div>
 <!-- position:fixed;bottom:0;width:100%; -->
-    <footer id="footer" style="text-align:center;width:100%;line-height:15px;">
+    <footer id="footer" class="bd-footer"style="text-align:center;width:100%;line-height:15px;">
       <div class="container">
         <div class="row d-flex align-items-center">
           <div class="col-lg-6 text-lg-left text-center">
@@ -427,6 +428,24 @@ function validateDOB(event) {
   }
 }
 
+
+function previewImage() {
+  var file = document.getElementById("fileInput").files[0];
+  var reader = new FileReader();
+
+  reader.onloadend = function() {
+    document.getElementById("preview").src = reader.result;
+
+  }
+
+  if (file) {
+
+    reader.readAsDataURL(file);
+  } else {
+
+    document.getElementById("preview").src = "";
+  }
+}
 
       </script>
 </body>
